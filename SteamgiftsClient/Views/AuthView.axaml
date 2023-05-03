@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
+             MaxWidth="400" MaxHeight="200"
+             Background="#d7ecff"
+             x:Class="SteamgiftsClient.Views.AuthView">
+    <StackPanel  Spacing="15" VerticalAlignment="Center">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Spacing="10">
+            <Label Height="30" VerticalContentAlignment="Center" Background="AliceBlue">
+                PHPSESID
+            </Label>
+            <Panel VerticalAlignment="Center" Height="70">
+                <TextBox Width="250" Height="30"
+                         BorderBrush="#bee0ff" Background="AliceBlue"
+                         VerticalContentAlignment="Center"
+                         IsReadOnly="{Binding LoginInProccess}"
+                         Text="{Binding PHPSESID}"/>
+                <Label Foreground="LightCoral" FontWeight="Bold" FontSize="12"
+                       VerticalAlignment="Bottom"
+                       Content="{Binding LoginStatus}">
+                </Label>
+            </Panel>
+            <Button i:Attached.Icon="fa-question-circle" FontSize="21"
+                    Foreground="Black" Background="Transparent"
+                    Height="40" Width="40"
+                    Command="{Binding ShowTutorialCommand}">
+            </Button>
+        </StackPanel>
+        <Button HorizontalContentAlignment="Center"
+                    Command="{Binding LoginCommand}"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                    Width="100"
+                    TextBlock.FontWeight="Bold" Background="AliceBlue">
+            LOGIN
+        </Button>
+    </StackPanel>
+</UserControl>

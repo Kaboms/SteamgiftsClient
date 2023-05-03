@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:vm="using:SteamgiftsClient.ViewModels"
+             xmlns:v="using:SteamgiftsClient.Views"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="600"
+             x:Class="SteamgiftsClient.Views.GiveawaysListView">
+  <StackPanel DockPanel.Dock="Right" Background="#d7ecff">
+            <Panel Background="AliceBlue" Margin="5">
+                <Label FontWeight="Bold" FontSize="18"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       >
+                    GIVEAWAYS
+                </Label>
+            </Panel>
+            <ScrollViewer Height="470" Width="535" Background="Transparent">
+                <Panel>
+                    <i:Icon Value="fa-spinner" Foreground="#a4d4ff" FontSize="72" Animation="Pulse"
+                            Height="516"
+                            VerticalAlignment="Center"
+                            IsVisible="{Binding IsLoading}"/>
+                    <Panel Height="516">
+                        <Panel.IsVisible>
+                            <MultiBinding Converter="{x:Static BoolConverters.And}">
+                                <Binding
+                                         Path="GiveawaysViewModels"
+                                         Converter="{x:Static ObjectConverters.IsNotNull}"/>
+                                <Binding
+                                         Path="!GiveawaysViewModels.Count"/>
+                                <Binding
+                                         Path="!IsLoading"/>
+
+                            </MultiBinding>
+                        </Panel.IsVisible>
+                        <StackPanel VerticalAlignment="Center">
+                            <i:Icon Value="fa-ghost" Foreground="#a4d4ff" FontSize="72"/>
+                            <Label Foreground="#a4d4ff" HorizontalContentAlignment="Center"
+                                   FontSize="18" FontWeight="ExtraBold">
+                                Hmm, nothing...
+                            </Label>
+                        </StackPanel>
+                    </Panel>
+                    <ItemsControl Items="{Binding GiveawaysViewModels}" Background="Transparent"/>
+                </Panel>
+            </ScrollViewer>
+            <v:PageNavigatorView DataContext="{Binding PageNavigatorViewModel}"/>
+            <Button Background="LightGreen" Width="535"
+                    HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    TextBlock.FontWeight="Bold">
+                ENTRY TO ALL
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="#A6F1A6" />
+                    </Style>
+                    <Style Selector="Button:pressed /template/ ContentPresenter">
+                        <Setter Property="Background" Value="LightGreen" />
+                    </Style>
+                </Button.Styles>
+            </Button>
+    </StackPanel>
+</UserControl>

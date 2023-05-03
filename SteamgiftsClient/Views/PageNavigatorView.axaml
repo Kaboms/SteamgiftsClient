@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="50"
+             xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             x:Class="SteamgiftsClient.Views.PageNavigatorView">
+    <UserControl.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#a4d4ff" />
+        </Style>
+        <Style Selector="Button:pressed /template/ ContentPresenter">
+            <Setter Property="Background" Value="#b4e4ff" />
+        </Style>
+        <Style Selector="Button:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="#a4d4ff" />
+            <Setter Property="TextBlock.Foreground" Value="Black" />
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel Background="Transparent" Orientation="Horizontal" HorizontalAlignment="Center"
+                Height="50">
+        <Button i:Attached.Icon="fa-chevron-left"
+                IsVisible="{Binding ShowGoPrevious}"
+                Command="{Binding GoPreviousCommand}"/>
+        <Button Content="1"
+                IsVisible="{Binding ShowShortcutToFirst }"
+                Command="{Binding GoToFirst}"/>
+        <Label VerticalContentAlignment="Center"
+               IsVisible="{Binding ShowDummyToFirst }">
+            ...
+        </Label>
+        <ItemsControl Margin="10"
+                      Items="{Binding NavigationButtons}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"
+                                Spacing="5"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Label VerticalContentAlignment="Center"
+               IsVisible="{Binding ShowDummyToLast}">
+            ...
+        </Label>
+        <Button Content="{Binding PagesCount}"
+                IsVisible="{Binding ShowShortcutToLast}"
+                Command="{Binding GoToLast}"/>
+        <Button i:Attached.Icon="fa-chevron-right"
+                IsVisible="{Binding ShowGoNext}"
+                Command="{Binding GoNextCommand}"/>
+    </StackPanel>
+</UserControl>

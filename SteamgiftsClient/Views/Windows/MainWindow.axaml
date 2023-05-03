@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:reactiveUi="http://reactiveui.net"
+        xmlns:vm="using:SteamgiftsClient.ViewModels"
+        xmlns:v="using:SteamgiftsClient.Views"
+        xmlns:vmw="using:SteamgiftsClient.ViewModels.Windows"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="SteamgiftsClient.Views.MainWindow"
+        MinWidth="800" MinHeight="600"
+        MaxWidth="800" MaxHeight="600"
+        Icon="/Assets/Icon.ico"
+        Title="Steamgifts Client"
+        Background="#bee0ff">
+
+    <Panel>
+        <reactiveUi:RoutedViewHost Grid.Row="0" Router="{Binding Router}">
+            <reactiveUi:RoutedViewHost.DefaultContent>
+                <i:Icon Value="fa-spinner" Foreground="White" FontSize="72" Animation="Pulse" Height="150"/>
+            </reactiveUi:RoutedViewHost.DefaultContent>
+        </reactiveUi:RoutedViewHost>
+    </Panel>
+</Window>

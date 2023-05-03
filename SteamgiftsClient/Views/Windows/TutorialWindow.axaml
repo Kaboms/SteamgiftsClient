@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="960" d:DesignHeight="720"
+        MinWidth="960" MinHeight="720"
+        MaxWidth="960" MaxHeight="720"
+        x:Class="SteamgiftsClient.Views.Windows.TutorialWindow"
+        Title="TutorialWindow"
+        Icon="/Assets/Icon.ico"
+        Background="#bee0ff">
+    <StackPanel Spacing="10">
+        <TextBlock Width="800" TextWrapping="Wrap"
+                   Margin="0,15,0,0" Padding="15,15,15,15"
+                   Background="#d7ecff"
+                   Foreground="LightCoral"
+                   FontWeight="Bold">
+            The program does not get access to your Steam account, it only needs PHPSESSID in order to gain access to the list of giveaways available to you and to be able to join them.
+        </TextBlock>
+        <Image Source="avares://SteamgiftsClient/Assets/Tutorial.png" Width="800"/>
+        <TextBlock Width="800" TextWrapping="Wrap"
+                   Background="#d7ecff"
+                   Padding="15,15,15,15">
+            Open www.steamgifts.com and sign in via Steam. After that, press F12 to open DevTools (Google Chrome). A panel will open where we should select the “Network” tab. Next, we should select the "Doc" filter and reload the site page (press F5).After that, several documents will appear in the list below, among which we should choose www.steamgifts.com. In the right pane, find PHPSESSID and copy the value.
+        </TextBlock>
+    </StackPanel>
+</Window>

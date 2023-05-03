@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:SteamgiftsClient.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="125"
+             MaxWidth="250" Height="125"
+             x:Class="SteamgiftsClient.Views.UserInfoView">
+    <DockPanel Background="#d7ecff">
+        <Panel Margin="5,0,0,0" Height="115" Width="120"
+               Background="AliceBlue" DockPanel.Dock="Left">
+            <Image Width="105" Source="{Binding Avatar}"
+                   IsVisible="{Binding Avatar, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+            <i:Icon Value="fa-user" Width="105" FontSize="96"
+                    IsVisible="{Binding Avatar, Converter={x:Static ObjectConverters.IsNull}}"/>
+        </Panel>
+        <StackPanel Spacing="5" Height="115" Width="115" Background="AliceBlue" DockPanel.Dock="Right">
+            <Label Background="#d7ecff" FontWeight="Bold"
+                   Content="{Binding UserInfo.Name}" Margin="5"/>
+            <StackPanel Background="#d7ecff" Orientation="Horizontal" Margin="5">
+                <Label>Level</Label>
+                <Label FontWeight="Bold" Content="{Binding UserInfo.Level}"></Label>
+            </StackPanel>
+            <StackPanel Background="#d7ecff" Orientation="Horizontal" Margin="5">
+                <Label>Points:</Label>
+                <Label FontWeight="Bold" Content="{Binding UserInfo.Points}"></Label>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

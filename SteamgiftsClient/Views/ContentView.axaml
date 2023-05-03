@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
+             xmlns:vm="using:SteamgiftsClient.ViewModels"
+             xmlns:v="using:SteamgiftsClient.Views"
+             xmlns:vr="using:SteamgiftsClient.Views.ReordedContainer"
+             xmlns:vmw="using:SteamgiftsClient.ViewModels.Windows"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             MinWidth="800" MinHeight="600"
+             MaxWidth="800" MaxHeight="600"
+             x:Class="SteamgiftsClient.Views.ContentView"
+             Background="#bee0ff">
+    <DockPanel>
+        <StackPanel Width="260" DockPanel.Dock="Left" Orientation="Vertical" Spacing="5">
+            <v:UserInfoView DataContext="{Binding UserInfoViewModel}"/>
+            <Button HorizontalContentAlignment="Center"
+        VerticalAlignment="Bottom" HorizontalAlignment="Center"
+        Width="250"
+        TextBlock.FontWeight="Bold" Background="AliceBlue">
+                SETTINGS
+            </Button>
+            <StackPanel HorizontalAlignment="Center"
+                        Margin="0,5,0,5"
+                        Height="377" Width="250" Background="#d7ecff">
+                <vr:ReorderContainerView DataContext="{Binding ReorderContainerViewModel}"/>
+            </StackPanel>
+            <Button HorizontalContentAlignment="Center"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                    Width="250"
+                    TextBlock.FontWeight="Bold" Background="AliceBlue">
+                APPLY FILTER
+            </Button>
+        </StackPanel>
+        <v:GiveawaysListView DataContext="{Binding GiveawaysListViewModel}"/>
+    </DockPanel>
+</UserControl>
