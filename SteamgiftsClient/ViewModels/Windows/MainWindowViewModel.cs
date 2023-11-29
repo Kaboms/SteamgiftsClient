@@ -39,13 +39,16 @@ namespace SteamgiftsClient.ViewModels.Windows
 
         public void ShowAuthView()
         {
-            var authViewModel = new AuthViewModel(this, _siteManager);
-            authViewModel.LoginCommand.Subscribe(result =>
+            Dispatcher.UIThread.InvokeAsync(() =>
             {
-                if (result == true)
-                    ShowContentView();
+                var authViewModel = new AuthViewModel(this, _siteManager);
+                authViewModel.LoginCommand.Subscribe(result =>
+                {
+                    if (result == true)
+                        ShowContentView();
+                });
+                Router.Navigate.Execute(authViewModel);
             });
-            Router.Navigate.Execute(new AuthViewModel(this, _siteManager));
         }
 
         public void ShowContentView()

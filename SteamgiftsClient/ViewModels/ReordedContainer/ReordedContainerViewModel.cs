@@ -16,13 +16,13 @@ namespace SteamgiftsClient.ViewModels.ReordedContainer
 
         public ReordedContainerViewModel()
         {
-            var vm1 = new ReorderContainerItemViewModel(new Label { Content = "1" });
+            var vm1 = new ReorderContainerItemViewModel(new Label { Content = "Wishlist" });
             var v1 = new ReorderContainerItemView { DataContext = vm1 };
 
-            var vm2 = new ReorderContainerItemViewModel(new Label { Content = "2" });
+            var vm2 = new ReorderContainerItemViewModel(new Label { Content = "Recommended" });
             var v2 = new ReorderContainerItemView { DataContext = vm2 };
 
-            var vm3 = new ReorderContainerItemViewModel(new Label { Content = "3" });
+            var vm3 = new ReorderContainerItemViewModel(new Label { Content = "All" });
             var v3 = new ReorderContainerItemView { DataContext = vm3 };
 
             Items.AddRange(new List<ReorderContainerItemView> { v1, v2, v3});
