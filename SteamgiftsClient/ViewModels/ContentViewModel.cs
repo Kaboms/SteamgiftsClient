@@ -1,7 +1,13 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Splat;
+using SteamgiftsClient.Common;
+using SteamgiftsClient.Models;
+using SteamgiftsClient.Services.PreferencesManager;
 using SteamgiftsClient.Services.SiteManager;
 using SteamgiftsClient.ViewModels.ReordedContainer;
+using System.Linq;
+using System.Reactive;
 
 namespace SteamgiftsClient.ViewModels
 {
@@ -18,6 +24,8 @@ namespace SteamgiftsClient.ViewModels
         public ReordedContainerViewModel ReorderContainerViewModel { get; set; } = new ReordedContainerViewModel();
         #endregion
 
+        public ReactiveCommand<Unit, Unit> ApplyFilterCommand { get; }
+
         public string? UrlPathSegment => "main";
 
         public IScreen HostScreen { get; }
@@ -28,6 +36,14 @@ namespace SteamgiftsClient.ViewModels
 
             UserInfoViewModel = new UserInfoViewModel(siteManager);
             GiveawaysListViewModel = new GiveawaysListViewModel(siteManager);
+
+            ApplyFilterCommand = ReactiveCommand.Create(AsyncApplyFilter);
+        }
+
+        private async void AsyncApplyFilter()
+        {
+            await Locator.Current.GetRequiredService<IPreferencesManager<UserPreferences>>()
+                .MakeChangesAsync(x => x.EntryCategoriesOrder = ReorderContainerViewModel.OrderedItems.Select(x => x.ViewModel.Category).ToList());
         }
     }
 }

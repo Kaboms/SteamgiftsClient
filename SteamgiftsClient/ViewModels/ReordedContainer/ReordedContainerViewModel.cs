@@ -1,12 +1,17 @@
-﻿using Avalonia.Controls;
-using Avalonia.Threading;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Media;
 using DynamicData;
+using Splat;
+using SteamgiftsClient.Common;
+using SteamgiftsClient.Common.Helpers;
+using SteamgiftsClient.Models;
+using SteamgiftsClient.Services.PreferencesManager;
+using SteamgiftsClient.Services.SiteManager;
 using SteamgiftsClient.Views.ReordedContainer;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SteamgiftsClient.ViewModels.ReordedContainer
 {
@@ -14,18 +19,54 @@ namespace SteamgiftsClient.ViewModels.ReordedContainer
     {
         public ObservableCollection<ReorderContainerItemView> Items { get; } = new ObservableCollection<ReorderContainerItemView>();
 
+        public List<Rect> ItemsBounds = new List<Rect>();
+
+        public List<ReorderContainerItemView> OrderedItems = new List<ReorderContainerItemView>();
+
         public ReordedContainerViewModel()
         {
-            var vm1 = new ReorderContainerItemViewModel(new Label { Content = "Wishlist" });
-            var v1 = new ReorderContainerItemView { DataContext = vm1 };
+            UserPreferences userPreferences = Locator.Current.GetRequiredService<IPreferencesManager<UserPreferences>>().GetPreferences();
 
-            var vm2 = new ReorderContainerItemViewModel(new Label { Content = "Recommended" });
-            var v2 = new ReorderContainerItemView { DataContext = vm2 };
+            foreach (SearchCategory searchCategory in userPreferences.EntryCategoriesOrder)
+            {
+                AddItem(searchCategory);
+            }
 
-            var vm3 = new ReorderContainerItemViewModel(new Label { Content = "All" });
-            var v3 = new ReorderContainerItemView { DataContext = vm3 };
+            OrderedItems = Items.ToList();
+        }
 
-            Items.AddRange(new List<ReorderContainerItemView> { v1, v2, v3});
+        private void AddItem(SearchCategory category)
+        {
+            var newItemViewModel = new ReorderContainerItemViewModel(new Label { Content = category.ToString() }, this, category);
+            var newItemView = new ReorderContainerItemView { DataContext = newItemViewModel };
+
+            Items.Add(newItemView);
+        }
+
+        public void CheckIntersections(ReorderContainerItemView checkItem)
+        {
+            int checkItemIndex = OrderedItems.IndexOf(checkItem);
+            for (int i = 0; i < OrderedItems.Count; i++)
+            {
+                if (i != checkItemIndex)
+                {
+                    if (ItemsBounds[i].Contains(checkItem.GetCurrentBounds().Center))
+                    {
+                        var newTransform = new TranslateTransform(0, ItemsBounds[checkItemIndex].Y - OrderedItems[i].Bounds.Y);
+                        OrderedItems[i].SetTransform(newTransform);
+
+                        OrderedItems.Swap(checkItemIndex, i);
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void SetItemDefaultBounds(ReorderContainerItemView checkItem)
+        {
+            int checkItemIndex = OrderedItems.IndexOf(checkItem);
+            OrderedItems[checkItemIndex].SetTransform(new TranslateTransform(0, ItemsBounds[checkItemIndex].Y - OrderedItems[checkItemIndex].Bounds.Y));
         }
     }
 }

@@ -24,9 +24,12 @@
             <StackPanel HorizontalAlignment="Center"
                         Margin="0,5,0,5"
                         Height="377" Width="250" Background="#d7ecff">
+                <Label HorizontalAlignment="Center" TextBlock.FontWeight="Bold">ENTER ORDER</Label>
                 <vr:ReorderContainerView DataContext="{Binding ReorderContainerViewModel}"/>
             </StackPanel>
-            <Button HorizontalContentAlignment="Center"
+            <Button
+                    Command="{Binding ApplyFilterCommand}"
+                    HorizontalContentAlignment="Center"
                     VerticalAlignment="Bottom" HorizontalAlignment="Center"
                     Width="250"
                     TextBlock.FontWeight="Bold" Background="AliceBlue">

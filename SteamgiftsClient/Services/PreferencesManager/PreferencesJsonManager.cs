@@ -11,7 +11,7 @@ namespace SteamgiftsClient.Services.PreferencesManager
     {
         private string _preferencesFilePath;
 
-        //private readonly ILogger<UserPreferencesJsonManager> _logger;
+        private PreferencesData? _defaultPreferences;
 
         private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1);
 
@@ -31,7 +31,7 @@ namespace SteamgiftsClient.Services.PreferencesManager
 
         public PreferencesData GetDefaultPreferences()
         {
-            return new PreferencesData();
+            return _defaultPreferences ?? new PreferencesData();
         }
 
         public PreferencesData GetPreferences()
@@ -87,6 +87,11 @@ namespace SteamgiftsClient.Services.PreferencesManager
             {
                 _semaphore.Release();
             }
+        }
+
+        public void SetDefaultPreferences(PreferencesData data)
+        {
+            _defaultPreferences = data;
         }
     }
 }

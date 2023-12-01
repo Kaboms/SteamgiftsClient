@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using ReactiveUI.Fody.Helpers;
+using SteamgiftsClient.Services.SiteManager;
 
 namespace SteamgiftsClient.ViewModels.ReordedContainer
 {
@@ -8,9 +9,15 @@ namespace SteamgiftsClient.ViewModels.ReordedContainer
         [Reactive]
         public ContentControl ItemData { get; set; }
 
-        public ReorderContainerItemViewModel(ContentControl itemData)
+        public ReordedContainerViewModel ParentContainer;
+
+        public SearchCategory Category { get; set; }
+
+        public ReorderContainerItemViewModel(ContentControl itemData, ReordedContainerViewModel parentContainer, SearchCategory category)
         {
             ItemData = itemData;
+            ParentContainer = parentContainer;
+            Category = category;
         }
     }
 }

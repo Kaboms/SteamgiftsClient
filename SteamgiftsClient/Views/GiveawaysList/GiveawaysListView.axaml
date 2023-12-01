@@ -47,10 +47,14 @@
                 </Panel>
             </ScrollViewer>
             <v:PageNavigatorView DataContext="{Binding PageNavigatorViewModel}"/>
-            <Button Background="LightGreen" Width="535"
+            <Button
+                    IsEnabled="{Binding !InProccess}"
+                    Command="{Binding EnterToAll}"
+                    Background="LightGreen" Width="535"
                     HorizontalAlignment="Center" HorizontalContentAlignment="Center"
                     VerticalAlignment="Bottom"
-                    TextBlock.FontWeight="Bold">
+                    TextBlock.FontWeight="Bold"
+                    >
                 ENTRY TO ALL
                 <Button.Styles>
                     <Style Selector="Button:pointerover /template/ ContentPresenter">

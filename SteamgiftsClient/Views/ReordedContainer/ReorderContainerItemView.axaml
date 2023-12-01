@@ -5,7 +5,7 @@
              xmlns:i="clr-namespace:Projektanker.Icons.Avalonia;assembly=Projektanker.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="75"
              x:Class="SteamgiftsClient.Views.ReordedContainer.ReorderContainerItemView">
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Background="White" Margin="5">
         <Button x:Name="MoveButton" i:Attached.Icon="fa-sort" Margin="10"/>
         <ContentControl Content="{Binding ItemData}" VerticalAlignment="Center"/>
     </StackPanel>

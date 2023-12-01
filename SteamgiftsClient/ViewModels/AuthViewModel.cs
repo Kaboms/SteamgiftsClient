@@ -43,7 +43,7 @@ namespace SteamgiftsClient.ViewModels
             HostScreen = screen;
 
             ShowTutorialCommand = ReactiveCommand.Create(ShowHelp);
-            LoginCommand = ReactiveCommand.CreateFromTask(Login);
+            LoginCommand = ReactiveCommand.CreateFromTask(AsyncLogin);
             LoginCommand.IsExecuting.ToProperty(this, x => x.LoginInProccess, out _loginInProccess);
 
             _siteManager = siteManager;
@@ -55,7 +55,7 @@ namespace SteamgiftsClient.ViewModels
             tutorialWindow.Show();
         }
 
-        private async Task<bool> Login()
+        private async Task<bool> AsyncLogin()
         {
             LoginStatus = string.Empty;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -30,6 +31,13 @@ namespace SteamgiftsClient.Common.Helpers
                 }
             }
             catch { }
+        }
+
+        public static void Swap<T>(this List<T> list, int i, int j)
+        {
+            T temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
         }
     }
 }

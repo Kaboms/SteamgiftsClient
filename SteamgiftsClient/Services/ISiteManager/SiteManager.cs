@@ -116,21 +116,29 @@ namespace SteamgiftsClient.Services.SiteManager
             return false;
         }
 
+        public string GetTypeByCategory(SearchCategory category)
+        {
+            switch (category)
+            {
+                case SearchCategory.Wishlist: return "type=wishlist";
+                case SearchCategory.Recommended: return "type=recommended";
+                case SearchCategory.All: return "";
+            }
+
+            return "";
+        }
+
         public async Task<List<Giveaway>> GetGiveawaysAsync(SearchCategory searchCategory, int page = 1)
         {
             List<Giveaway> result = new List<Giveaway>();
 
-            string request = "";
-            switch (searchCategory)
-            {
-                case SearchCategory.Wishlist: request = "giveaways/search?type=wishlist"; break;
-                case SearchCategory.Recommended: request = "giveaways/search?type=recommended"; break;
-                case SearchCategory.All: request = ""; break;
-            }
+            string request = "giveaways/search?";
+            string searchCategoryStr = GetTypeByCategory(searchCategory);
+            request += searchCategoryStr;
 
             if (page > 1)
             {
-                request += (request == string.Empty ? "giveaways/search?page=" : "&page=") + page;
+                request += (searchCategoryStr == string.Empty ? "page=" : "&page=") + page;
             }
 
             var htmlData = await GetResponseDataFromRequestAsync(request);

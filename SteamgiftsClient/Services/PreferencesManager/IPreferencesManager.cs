@@ -7,6 +7,8 @@ namespace SteamgiftsClient.Services.PreferencesManager
     {
         protected void InitAsync();
 
+        public void SetDefaultPreferences(PreferencesData data);
+
         /// <summary>
         /// Get copy of the preferences. Make changes to returned data does not affect to the current preferences
         /// </summary>

@@ -9,6 +9,7 @@ using SteamgiftsClient.Services.SiteManager;
 using SteamgiftsClient.ViewModels.Windows;
 using SteamgiftsClient.Views;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace SteamgiftsClient
@@ -28,6 +29,9 @@ namespace SteamgiftsClient
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                Locator.Current.GetRequiredService<IPreferencesManager<UserPreferences>>()
+                    .SetDefaultPreferences(new UserPreferences { EntryCategoriesOrder = new List<SearchCategory> { SearchCategory.Wishlist, SearchCategory.Recommended, SearchCategory.All } });
+
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = new MainWindowViewModel(
